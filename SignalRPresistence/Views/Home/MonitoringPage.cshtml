@@ -1,0 +1,91 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MonitoringPage</title>
+    <script src="~/Scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        table {
+            border: 1px solid #808080;
+            width: 600px;
+        }
+
+        td {
+            border: 1px solid #808080;
+            padding: 3px;
+        }
+
+        .odd {
+        }
+
+        .even {
+        }
+
+        .non-temptr {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#userstable tbody tr:odd").addClass("odd");
+            $("#userstable tbody tr:even").addClass("even");
+
+            var conn = $.connection("/MyConnection", { "Monitoring": "Y" });
+
+            conn.start().done(function () {
+                $("#userstable").delegate("button.pass", "click", function () {
+                    var rid = $(this).parent("td").prev().attr("data-rid");
+                    conn.send(rid);
+                    var tr = $(this).parents("tr");
+                    tr.remove();
+                });
+
+            }).fail(function (msg) {
+                alert(msg);
+            });
+
+            conn.received(function (msg) {
+                if (msg == "ready") {
+                    $("#spstatus").html("监控服务已就绪");
+                    return;
+                }
+                else if (msg.indexOf("in_") == 0) {
+                    var tr = $(".non-temptr").clone(true);
+                    tr.removeClass("non-temptr");
+                    var td = tr.children().first();
+                    var rid = msg.toString().substr("in_".length);
+                    td.html(rid + "进入被监控页面，是否允许？");
+                    td.attr("data-rid", rid);
+                    $("#userstable tbody").append(tr);
+                }
+                else {
+                    var rid = msg.toString().substr("out_".length);
+                    $("td[data-rid=" + rid + "]").parent("tr").remove();
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        以下是实时监控到进入EnterPage页面的用户情况：(服务状况：<strong><span id="spstatus"></span></strong>)
+    </div>
+    <table id="userstable">
+        <tr>
+            <td>用户进入消息</td>
+            <td>授 权</td>
+        </tr>
+        <tr class="non-temptr">
+            <td></td>
+            <td style="width:100px"><button class="pass">允许</button></td>
+        </tr>
+    </table>
+</body>
+</html>

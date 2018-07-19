@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!-- EnterPage.cshtml 监控受限页面-->
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EnterPage</title>
+    <script src="~/Scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(function () {
+            var conn = $.connection("/MyConnection");
+
+            conn.start().fail(function (msg) {
+                alert(msg);
+            });
+
+            conn.received(function (data) {
+                if (data == "pass") {
+                    $("#msg").html("管理员已审核通过，可以进入浏览详情。");
+                    setTimeout(function () {
+                        self.location = "http://www.zuowenjun.cn";
+                    }, 3000);
+                }
+                else {
+                    $("#msg").html("无管理员在线，请稍候再重新进入该页面。");
+                }
+            });
+        });
+    </script>
+    <div id="msg">
+        该页面浏览受限，已自动将您的浏览请求发给管理员，请稍候。。。
+    </div>
+</body>
+</html>
+

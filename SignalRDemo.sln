@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hub", "Hub", "{CCBD1E23-1DAD-49BD-AF64-178472AAD955}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{28237E8C-380A-4FD1-BFA0-1C397C1893B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRHub", "SignalRHubServer\SignalRHub.csproj", "{E1D7886E-04DC-4EF2-94A9-D8353D3F99F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRPresistence", "SignalRPresistence\SignalRPresistence.csproj", "{7C823992-BC3A-48F7-A2C6-30E09D9AEEFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1D7886E-04DC-4EF2-94A9-D8353D3F99F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D7886E-04DC-4EF2-94A9-D8353D3F99F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D7886E-04DC-4EF2-94A9-D8353D3F99F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D7886E-04DC-4EF2-94A9-D8353D3F99F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C823992-BC3A-48F7-A2C6-30E09D9AEEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C823992-BC3A-48F7-A2C6-30E09D9AEEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C823992-BC3A-48F7-A2C6-30E09D9AEEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C823992-BC3A-48F7-A2C6-30E09D9AEEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E1D7886E-04DC-4EF2-94A9-D8353D3F99F6} = {CCBD1E23-1DAD-49BD-AF64-178472AAD955}
+		{7C823992-BC3A-48F7-A2C6-30E09D9AEEFC} = {28237E8C-380A-4FD1-BFA0-1C397C1893B4}
+	EndGlobalSection
+EndGlobal
